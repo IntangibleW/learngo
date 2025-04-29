@@ -8,6 +8,11 @@
 
 package main
 
+import (
+	"fmt"
+	"time"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Shy Semicolons
 //
@@ -19,4 +24,7 @@ package main
 // ---------------------------------------------------------
 
 func main() {
+	time.Sleep(1000 * time.Millisecond)
+	fmt.Println("1000 ms elapsed.")
+	fmt.Println("Now we're done.")
 }
