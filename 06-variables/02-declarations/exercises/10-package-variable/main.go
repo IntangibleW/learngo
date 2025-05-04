@@ -17,5 +17,7 @@ package main
 //     use it
 // ---------------------------------------------------------
 
+var variable rune
+
 func main() {
 }
