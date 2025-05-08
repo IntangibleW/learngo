@@ -80,4 +80,6 @@ func main() {
 	//
 	//    For example : 00000100
 	//    Should print: 4
+	val, _ = strconv.ParseInt(os.Args[5], 2, 8)
+	fmt.Println(os.Args[5], "is: ", int8(val))
 }
