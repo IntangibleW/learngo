@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 
-	"github.com/IntangibleW/learngo/05-write-your-first-library-package/exercise"
+	"github.com/inancgumus/learngo/05-write-your-first-library-package/exercise/solution/golang"
 )
 
 func main() {
-	fmt.Println(exercise.Version())
+	fmt.Println(golang.Version())
 }
