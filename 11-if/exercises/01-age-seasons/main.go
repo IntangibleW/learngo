@@ -8,6 +8,12 @@
 
 package main
 
+import (
+	"fmt"
+	"os"
+	"strconv"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Age Seasons
 //
@@ -29,7 +35,26 @@ package main
 
 func main() {
 	// Change this accordingly to produce the expected outputs
-	// age := 10
+	if len(os.Args) < 2 {
+		fmt.Println("Usage: Program [number]")
+		return
+	}
+	age, err := strconv.Atoi(os.Args[1])
+	if err != nil {
+		fmt.Printf("Cannot parse arg: %s\n", os.Args[1])
+		return
+	}
 
 	// Type your if statement here.
+	if age > 60 {
+		fmt.Println("Getting older")
+	} else if age > 30 {
+		fmt.Println("Getting wiser")
+	} else if age > 20 {
+		fmt.Println("Adulthood")
+	} else if age > 10 {
+		fmt.Println("Young blood")
+	} else {
+		fmt.Println("Booting up")
+	}
 }
