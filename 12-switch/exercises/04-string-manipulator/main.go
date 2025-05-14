@@ -8,10 +8,17 @@
 
 package main
 
+import (
+	"fmt"
+	"os"
+	"strings"
+)
+
 // ---------------------------------------------------------
 // STORY
-//  You want to write a program that will manipulate a
-//  given string to uppercase, lowercase, and title case.
+//
+//	You want to write a program that will manipulate a
+//	given string to uppercase, lowercase, and title case.
 //
 // EXERCISE: String Manipulator
 //
@@ -20,15 +27,17 @@ package main
 //  2. Get the string to be manipulated as the 2nd argument.
 //
 // HINT
-//  You can find the manipulation functions in the strings
-//  package Go documentation (ToLower, ToUpper, Title).
+//
+//	You can find the manipulation functions in the strings
+//	package Go documentation (ToLower, ToUpper, Title).
 //
 // EXPECTED OUTPUT
 //
-//  go run main.go
-//    [command] [string]
-//
-//    Available commands: lower, upper and title
+//	go run main.go
+const usage = `[command] [string]
+
+Available commands: lower, upper and title`
+
 //
 //  go run main.go lower 'OMG!'
 //    omg!
@@ -44,5 +53,18 @@ package main
 // ---------------------------------------------------------
 
 func main() {
+	if len(os.Args) != 3 {
+		fmt.Println(usage)
+	}
 
+	switch os.Args[1] {
+	case "lower":
+		fmt.Println(strings.ToLower(os.Args[2]))
+	case "upper":
+		fmt.Println(strings.ToUpper(os.Args[2]))
+	case "title":
+		fmt.Println(strings.Title(os.Args[2]))
+	default:
+		fmt.Printf("Unknown command: %q", os.Args[1])
+	}
 }

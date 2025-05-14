@@ -31,23 +31,32 @@ const (
 func main() {
 	args := os.Args
 
-	if len(args) != 3 {
+	switch {
+	case len(args) != 3:
 		fmt.Println(usage)
 		return
 	}
-
 	u, p := args[1], args[2]
 
 	//
 	// REFACTOR THIS TO A SWITCH
 	//
-	if u != user && u != user2 {
+	switch u {
+	case user:
+		switch p {
+		case pass:
+			fmt.Printf(accessOK, u)
+		default:
+			fmt.Printf(errPwd, u)
+		}
+	case user2:
+		switch p {
+		case pass2:
+			fmt.Printf(accessOK, u)
+		default:
+			fmt.Printf(errPwd, u)
+		}
+	default:
 		fmt.Printf(errUser, u)
-	} else if u == user && p == pass {
-		fmt.Printf(accessOK, u)
-	} else if u == user2 && p == pass2 {
-		fmt.Printf(accessOK, u)
-	} else {
-		fmt.Printf(errPwd, u)
 	}
 }
