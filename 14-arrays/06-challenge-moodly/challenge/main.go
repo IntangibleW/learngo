@@ -8,6 +8,13 @@
 
 package main
 
+import (
+	"fmt"
+	"math/rand"
+	"os"
+	"time"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Moodly
 //
@@ -45,5 +52,22 @@ package main
 //     Socrates feels terrible 😩
 // ---------------------------------------------------------
 
+var moodMessages = [...]string{
+	"good 👍",
+	"bad 👎",
+	"sad 😞",
+	"happy 😀",
+	"awesome 😎",
+	"terrible 😩",
+}
+
 func main() {
+	if len(os.Args) != 2 {
+		fmt.Println("[your name]")
+		return
+	}
+	username := os.Args[1]
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+
+	fmt.Println(username + " feels " + moodMessages[r.Intn(len(moodMessages))])
 }
