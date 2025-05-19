@@ -8,6 +8,13 @@
 
 package main
 
+import (
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Math Tables
 //
@@ -104,5 +111,66 @@ package main
 //     go run main.go "*" 4
 // ---------------------------------------------------------
 
+const (
+	validOps       = "+-*/%"
+	usageMsg       = "Usage: [op=" + validOps + "] [size]"
+	sizeMissingMsg = "Size is missing"
+	invalidOpMsg   = "Invalid operator.\nValid ops one of: " + validOps
+)
+
 func main() {
+	args := os.Args[1:] // Command line arguments
+
+	switch l := len(args); {
+	case l == 1:
+		fmt.Println(sizeMissingMsg)
+		fallthrough
+	case l < 1:
+		fmt.Println(usageMsg)
+		return
+	}
+
+	operator := args[0]
+	if !strings.ContainsAny(validOps, operator) {
+		fmt.Println(invalidOpMsg)
+		return
+	}
+
+	size, err := strconv.ParseUint(args[1], 10, 64)
+	if err != nil {
+		fmt.Println("Wrong size")
+		return
+	}
+
+	fmt.Printf("%5s", operator)
+	for i := uint64(0); i <= size; i++ {
+		fmt.Printf("%5d", i)
+	}
+	fmt.Println()
+
+	for i := uint64(0); i <= size; i++ {
+		fmt.Printf("%5d", i)
+		for j := uint64(0); j <= size; j++ {
+			var res int
+
+			switch operator {
+			case "+":
+				res = int(i + j)
+			case "-":
+				res = int(i - j)
+			case "*":
+				res = int(i * j)
+			case "/":
+				if j != 0 {
+					res = int(i / j)
+				}
+			case "%":
+				if j != 0 {
+					res = int(i % j)
+				}
+			}
+			fmt.Printf("%5d", res)
+		}
+		fmt.Println()
+	}
 }

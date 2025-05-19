@@ -8,6 +8,12 @@
 
 package main
 
+import (
+	"fmt"
+	"os"
+	"strconv"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Sum up to N
 //
@@ -36,4 +42,31 @@ package main
 // ---------------------------------------------------------
 
 func main() {
+	if len(os.Args) != 3 {
+		fmt.Println("Usage: [min] and [max]")
+		return
+	}
+	min, err1 := strconv.Atoi(os.Args[1])
+	max, err2 := strconv.Atoi(os.Args[2])
+	if err1 != nil {
+		fmt.Println("Failed to convert argument 1 to number.")
+		return
+	} else if err2 != nil {
+		fmt.Println("Failed to convert argument 2 to number.")
+		return
+	} else if min >= max {
+		fmt.Println("Argument 1 must be less than argument 2.")
+		return
+	}
+
+	sum := 0
+	for i := min; i <= max; i++ {
+		sum += i
+		if i != max {
+			fmt.Printf("%d + ", i)
+		} else {
+			fmt.Printf("%d = ", i)
+		}
+	}
+	fmt.Printf("%d\n", sum)
 }

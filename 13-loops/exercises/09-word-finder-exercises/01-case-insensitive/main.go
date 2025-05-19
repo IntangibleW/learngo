@@ -8,6 +8,12 @@
 
 package main
 
+import (
+	"fmt"
+	"os"
+	"strings"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Case Insensitive Search
 //
@@ -25,4 +31,15 @@ package main
 // ---------------------------------------------------------
 
 func main() {
+	if len(os.Args) < 2 {
+		fmt.Println("Example: go run main.go lazy")
+		return
+	}
+
+	args := os.Args[1:]
+	for _, value := range args {
+		if strings.ToLower(value) == "lazy" {
+			fmt.Println(value + " found.")
+		}
+	}
 }

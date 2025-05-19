@@ -8,6 +8,14 @@
 
 package main
 
+import (
+	"fmt"
+	"math/rand"
+	"os"
+	"strconv"
+	"time"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Enough Picks
 //
@@ -46,4 +54,25 @@ package main
 // ---------------------------------------------------------
 
 func main() {
+	number, _ := strconv.Atoi(os.Args[1])
+	if number < 0 {
+		return
+	}
+
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	if number <= 10 {
+		randomNumber := r.Intn(11)
+		if randomNumber == number {
+			fmt.Println("Win")
+		} else {
+			fmt.Println("Lose")
+		}
+	} else {
+		randomNumber := r.Intn(number)
+		if randomNumber == number {
+			fmt.Println("Win")
+		} else {
+			fmt.Println("Lose")
+		}
+	}
 }

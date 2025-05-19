@@ -8,6 +8,14 @@
 
 package main
 
+import (
+	"fmt"
+	"math/rand"
+	"os"
+	"strconv"
+	"time"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Verbose Mode
 //
@@ -26,5 +34,23 @@ package main
 //  You need to get and interpret the command-line arguments.
 // ---------------------------------------------------------
 
+var verbose bool
+
 func main() {
+	if os.Args[1] == "-v" {
+		verbose = true
+	}
+
+	number, _ := strconv.Atoi(os.Args[2])
+
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	for randomNumber := r.Intn(number + 1); ; randomNumber = r.Intn(number + 1) {
+		if verbose {
+			fmt.Printf("%d ", randomNumber)
+		}
+		if randomNumber == number {
+			fmt.Printf("🎉  YOU WIN!\n")
+			break
+		}
+	}
 }

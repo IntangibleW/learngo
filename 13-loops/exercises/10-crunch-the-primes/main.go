@@ -8,6 +8,13 @@
 
 package main
 
+import (
+	"fmt"
+	"math/big"
+	"os"
+	"strconv"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Crunch the primes
 //
@@ -34,4 +41,20 @@ package main
 // ---------------------------------------------------------
 
 func main() {
+	args := os.Args[1:]
+	var numbers []int
+
+	for _, v := range args {
+		tmp, err := strconv.Atoi(v)
+		if err == nil {
+			numbers = append(numbers, tmp)
+		}
+	}
+
+	for _, v := range numbers {
+		if big.NewInt(int64(v)).ProbablyPrime(0) {
+			fmt.Printf("%d ", v)
+		}
+	}
+	fmt.Printf("\n")
 }

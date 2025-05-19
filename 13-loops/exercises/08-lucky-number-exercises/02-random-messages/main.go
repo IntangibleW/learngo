@@ -8,6 +8,14 @@
 
 package main
 
+import (
+	"fmt"
+	"math/rand"
+	"os"
+	"strconv"
+	"time"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Random Messages
 //
@@ -34,5 +42,34 @@ package main
 //    YOU LOST. TRY AGAIN?
 // ---------------------------------------------------------
 
+var (
+	wonMessages = [...]string{
+		"YOU WON",
+		"YOU'RE AWESOME",
+	}
+	lostMessages = [...]string{
+		"LOSER!",
+		"YOU LOST. TRY AGAIN?",
+	}
+)
+
 func main() {
+	if len(os.Args) != 2 {
+		fmt.Println("Give me an argument")
+		return
+	}
+
+	arg1, err := strconv.Atoi(os.Args[1])
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	Random := rand.New(rand.NewSource(time.Now().UnixNano()))
+	switch Random.Int() {
+	case arg1:
+		fmt.Println(wonMessages[Random.Intn(len(wonMessages))])
+	default:
+		fmt.Println(lostMessages[Random.Intn(len(lostMessages))])
+	}
 }
